@@ -10,8 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 @Document(collection = "users")
 @Data
@@ -34,12 +32,38 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @DBRef
-    private Set<Role> roles = new HashSet<>();
+    @NotBlank
+    @Size(max = 50)
+    private String firstName;
 
-    public User(String username, String email, String password) {
+    @NotBlank
+    @Size(max = 50)
+    private String lastName;
+
+    @NotBlank
+    @Size(max = 50)
+    private String address;
+
+    @NotBlank
+    @Size(max = 50)
+    private String city;
+
+    @NotBlank
+    @Size(max = 50)
+    private Integer phone;
+
+    @DBRef
+    private Role role;
+
+    public User(String username, String email, String password, String firstName, String lastName, String address, String city, Integer phone, Role role) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.phone = phone;
+        this.role = role;
     }
 }

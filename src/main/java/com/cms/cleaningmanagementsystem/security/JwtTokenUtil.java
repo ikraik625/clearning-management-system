@@ -1,6 +1,6 @@
 package com.cms.cleaningmanagementsystem.security;
 
-import com.cms.cleaningmanagementsystem.service.impl.UserDetailsImpl;
+import com.cms.cleaningmanagementsystem.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
