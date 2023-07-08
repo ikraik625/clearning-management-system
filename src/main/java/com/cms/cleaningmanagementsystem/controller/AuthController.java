@@ -1,15 +1,16 @@
 package com.cms.cleaningmanagementsystem.controller;
 
-import com.cms.cleaningmanagementsystem.security.JwtTokenUtil;
 import com.cms.cleaningmanagementsystem.controller.request.LoginRequest;
 import com.cms.cleaningmanagementsystem.controller.request.SignupRequest;
 import com.cms.cleaningmanagementsystem.controller.response.JwtResponse;
 import com.cms.cleaningmanagementsystem.controller.response.MessageResponse;
+import com.cms.cleaningmanagementsystem.constant.ERole;
 import com.cms.cleaningmanagementsystem.model.Role;
 import com.cms.cleaningmanagementsystem.model.User;
 import com.cms.cleaningmanagementsystem.repository.RoleRepository;
 import com.cms.cleaningmanagementsystem.repository.UserRepository;
-import com.cms.cleaningmanagementsystem.service.impl.UserDetailsImpl;
+import com.cms.cleaningmanagementsystem.security.JwtTokenUtil;
+import com.cms.cleaningmanagementsystem.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,10 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -81,42 +79,43 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
-
         Set<String> strRoles = signUpRequest.getRoles();
-        Set<Role> roles = new HashSet<>();
+        Set<ERole> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(Role.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
+            Optional<Role> userRole = roleRepository.findByeRole(ERole.ROLE_USER.name());
+            if(userRole.isEmpty()) {
+                roles.add(ERole.ROLE_USER);
+            }
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        Role adminRole = roleRepository.findByName(Role.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-
+                        Optional<Role> adminRole = roleRepository.findByeRole(ERole.ROLE_ADMIN.name());
+                        if(adminRole.isEmpty()) {
+                            roles.add(ERole.ROLE_USER);
+                        }
                         break;
                     case "mod":
-                        Role modRole = roleRepository.findByName(Role.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-
+                        Optional<Role> modRole = roleRepository.findByeRole(ERole.ROLE_MODERATOR.name());
+                        if(modRole.isEmpty()) {
+                            roles.add(ERole.ROLE_USER);
+                        }
                         break;
                     default:
-                        Optional<Role> userRole = roleRepository.findByName(Role.ROLE_USER);
-                                //.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        userRole.ifPresent(roles::add);
+                        Optional<Role> userRole = roleRepository.findByeRole(ERole.ROLE_USER.name());
+                        if(userRole.isEmpty()) {
+                            roles.add(ERole.ROLE_USER);
+                        }
                 }
             });
         }
-
-        user.setRoles(roles);
+        Role role = new Role(UUID.randomUUID().toString(),roles);
+//        role.setId(UUID.randomUUID().toString());
+        // Create new user's account
+        User user = new User(signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword()),signUpRequest.getFirstName(),signUpRequest.getLastName(),signUpRequest.getAddress(),signUpRequest.getCity(),signUpRequest.getPhone(),role);
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

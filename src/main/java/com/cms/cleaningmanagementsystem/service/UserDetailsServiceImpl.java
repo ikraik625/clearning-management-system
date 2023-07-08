@@ -1,4 +1,4 @@
-package com.cms.cleaningmanagementsystem.service.impl;
+package com.cms.cleaningmanagementsystem.service;
 
 import com.cms.cleaningmanagementsystem.model.User;
 import com.cms.cleaningmanagementsystem.repository.UserRepository;
