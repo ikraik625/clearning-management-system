@@ -1,10 +1,10 @@
 package com.cms.cleaningmanagementsystem.controller;
 
+import com.cms.cleaningmanagementsystem.constant.ERole;
 import com.cms.cleaningmanagementsystem.controller.request.LoginRequest;
 import com.cms.cleaningmanagementsystem.controller.request.SignupRequest;
 import com.cms.cleaningmanagementsystem.controller.response.JwtResponse;
 import com.cms.cleaningmanagementsystem.controller.response.MessageResponse;
-import com.cms.cleaningmanagementsystem.constant.ERole;
 import com.cms.cleaningmanagementsystem.model.Role;
 import com.cms.cleaningmanagementsystem.model.User;
 import com.cms.cleaningmanagementsystem.repository.RoleRepository;
@@ -119,5 +119,20 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PostMapping("/authenticate")
+    public String generateToken(@RequestBody LoginRequest authRequest) throws Exception {
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+            );
+        } catch (Exception ex) {
+            throw new Exception("INVALID USERNAME/PASSWORD");
+        }
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+        return jwtUtils.generateJwtToken(authentication);
     }
 }
