@@ -5,13 +5,19 @@ import com.cms.cleaningmanagementsystem.controller.request.LoginRequest;
 import com.cms.cleaningmanagementsystem.controller.request.SignupRequest;
 import com.cms.cleaningmanagementsystem.controller.response.JwtResponse;
 import com.cms.cleaningmanagementsystem.controller.response.MessageResponse;
+import com.cms.cleaningmanagementsystem.controller.response.TokenResponse;
 import com.cms.cleaningmanagementsystem.model.Role;
 import com.cms.cleaningmanagementsystem.model.User;
 import com.cms.cleaningmanagementsystem.repository.RoleRepository;
 import com.cms.cleaningmanagementsystem.repository.UserRepository;
 import com.cms.cleaningmanagementsystem.security.JwtTokenUtil;
 import com.cms.cleaningmanagementsystem.service.UserDetailsImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +26,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -43,6 +50,9 @@ public class AuthController {
 
     @Autowired
     JwtTokenUtil jwtUtils;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -122,7 +132,7 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public String generateToken(@RequestBody LoginRequest authRequest) throws Exception {
+    public ResponseEntity<TokenResponse> generateToken(@RequestBody LoginRequest authRequest) throws Exception {
         Authentication authentication;
         try {
             authentication = authenticationManager.authenticate(
@@ -133,6 +143,19 @@ public class AuthController {
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        return jwtUtils.generateJwtToken(authentication);
+        try {
+            // Convert the response object to JSON
+            String jsonResponse = objectMapper.writeValueAsString(jwt);
+
+            // Set the appropriate Content-Type header
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            TokenResponse tokenResponse = new TokenResponse();
+            tokenResponse.setToken(jsonResponse);
+            // Return the response as JSON
+            return new ResponseEntity<>(tokenResponse, headers, HttpStatus.OK);
+        } catch (JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to generate token");
+        }
     }
 }
