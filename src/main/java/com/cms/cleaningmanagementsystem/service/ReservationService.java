@@ -29,8 +29,7 @@ public class ReservationService {
 
     public Reservation modifyReservation(String id, Reservation newReservation) {
         Reservation reservation = getReservationById(id);
-        reservation.setStartDateTime(newReservation.getStartDateTime());
-        reservation.setEndDateTime(newReservation.getEndDateTime());
+        reservation.setBookingDateTime(newReservation.getBookingDateTime());
         return reservationRepository.save(reservation);
     }
 
