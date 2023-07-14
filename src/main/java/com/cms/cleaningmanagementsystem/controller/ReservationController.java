@@ -3,7 +3,7 @@ package com.cms.cleaningmanagementsystem.controller;
 import com.cms.cleaningmanagementsystem.model.Reservation;
 import com.cms.cleaningmanagementsystem.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
