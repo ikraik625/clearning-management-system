@@ -1,0 +1,45 @@
+.container {
+  display: grid;
+  grid-template-columns: 80px 80px 300px 80px 50px;
+  gap: 10px; /* Optional: Add gap between columns */
+  max-width: 650px;
+  max-height: 200px;
+
+  border-radius: 16px;
+  border: 1px solid black;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.column {
+  max-height: 30px;
+}
+
+.icon-edit {
+  height: 20px;
+  width: 20px;
+}
+.icon-delete {
+  height: 20px;
+  width: 20px;
+  color: #d42828;
+}
+.icon-time {
+  height: 20px;
+  width: 20px;
+  color: #666666;
+}
+
+.icon-chercher {
+  height: 20px;
+  width: 20px;
+  color: #7d7b7b;
+}

@@ -1,0 +1,20 @@
+[
+{
+  "_id": "64aa957cd1c425794a0f2ff2",
+  "username": "aafaf",
+  "email": "aafaf@example.com",
+  "password": "$2a$10$0UHevQKYHmVS2z39lhgQnOIrO3zBAwaYqEmfZc62c2j6znVVbWuLm",
+  "firstName": "AAFAF",
+  "lastName": "ELHYAOUY",
+  "address": "123 Main St",
+  "city": "Morocco",
+  "phone": 1234567890,
+  "role": {
+    "$ref": "roles",
+    "$id": "role1",
+    "eRole": ["user", "admin"]
+  },
+  "_class": "com.cms.cleaningmanagementsystem.model.User"
+}
+]
+

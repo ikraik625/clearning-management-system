@@ -1,0 +1,134 @@
+.form-section .form-container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 700px;
+  max-height: 573px;
+  border-radius: 60px;
+  background-color: #f8f8f8;
+  margin: 0 auto;
+}
+
+.form-section .form-container .left-infos {
+  width: 50%;
+  display: inline-block;
+  vertical-align: auto;
+  padding: 40px;
+  border: 1px solid black;
+  border-radius: 50px;
+  align-self: flex-start;
+}
+
+.form-section .form-container .right-infos {
+  width: 50%;
+  display: inline-block;
+  vertical-align: auto;
+
+  padding: 30px;
+}
+
+.form-section .form-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
+  font-weight: bolder;
+}
+
+.form-section .form-container input[type="text"],
+.form-section .form-container input[type="password"],
+.form-section .form-container select {
+  background-color: #ffffff;
+  border-radius: 19px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.frequency-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.frequency-button {
+  width: 48%;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: #ffffff;
+  border-radius: 19px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  outline: none !important;
+  border: none;
+}
+
+.next-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: bolder;
+  background-color: #ffd18d;
+  border: none;
+  border-radius: 19px;
+  padding: 10px 20px;
+  color: black;
+  cursor: pointer;
+  float: right; /* Add this line */
+  margin-top: 10px;
+}
+.back-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: grey;
+  border: none;
+  border-radius: 19px;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  float: left; /* Add this line */
+  margin-top: 10px;
+}
+
+.next-button:hover {
+  background-color: #ffc56c;
+}
+
+.pricing-cart {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: bolder;
+  text-align: left;
+
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.item-label {
+  text-align: left;
+}
+
+.item-value {
+  display: inline-block;
+  text-align: left;
+}
+.total-price {
+  color: #4ec96f;
+}

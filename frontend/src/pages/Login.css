@@ -1,0 +1,110 @@
+.login-container {
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 500px;
+}
+
+.login-container h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.login-container p {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.inscription-link {
+  font-weight: bolder;
+}
+
+.login-container .form-line {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.login-container .input-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px;
+}
+
+.login-container .input-container label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: bolder;
+  margin-bottom: 4px;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 5px;
+}
+
+.login-container .input-container input {
+  padding: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 30px;
+  border: 1px solid #bcbcbc;
+}
+
+.login-container form .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container button {
+  width: 140px;
+  padding: 6px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffd18d;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: bolder;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.login-container .error-message {
+  color: #ffbb56;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-container {
+    max-width: 90%;
+  }
+  .login-container h1 {
+    font-size: 16px;
+  }
+  .input-container input {
+    font-size: 10px;
+  }
+
+  .long-input input {
+    font-size: 10px;
+  }
+
+  button {
+    font-size: 12px;
+  }
+}

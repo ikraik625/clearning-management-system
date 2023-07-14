@@ -1,0 +1,15 @@
+.update-form-container {
+  max-width: 380px;
+  margin: auto;
+}
+
+.form-container {
+  background-color: #f8f8f8;
+  border-radius: 50px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.button-update {
+  margin: auto;
+}

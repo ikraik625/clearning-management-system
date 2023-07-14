@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "role1",
+    "eRole": ["ROLE_USER", "ROLE_ADMIN"]
+  },
+  {
+    "_id": "role2",
+    "eRole": ["ROLE_USER"]
+  }
+]
+

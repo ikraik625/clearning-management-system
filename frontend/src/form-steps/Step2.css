@@ -1,0 +1,31 @@
+.addon-button {
+  width: 48%;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: #ffffff;
+  border-radius: 19px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  outline: none !important;
+  border: none;
+  margin-right: 10px;
+}
+
+.addon-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.addon-button {
+  width: calc(50% - 10px);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.addon-button.selected {
+  background-color: #d0eed4;
+}
