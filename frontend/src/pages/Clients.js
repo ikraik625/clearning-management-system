@@ -260,6 +260,88 @@ const Clients = () => {
     </div>
   </div>
   <div className="user-list-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr className="user-row" >
+            <td className="user-column">{`user.email`}</td>
+            <td className="user-column">{`user.firstName`}</td>
+            <td className="user-column">{`user.lastName`}</td>
+            <td className="user-column">{`user.address`}</td>
+            <td className="user-column">{`user.city`}</td>
+            <td className="user-column">
+              <button
+                className="modifier-button"
+                onClick={() => {}}
+              >
+                Modifier
+              </button>
+              <br/>
+              <button
+                className="supprimer-button"
+                onClick={() => {}}
+              >
+                Supprimer
+              </button>
+            </td>
+        </tr>
+        <tr className="user-row" >
+          <td className="user-column">{`user.email`}</td>
+          <td className="user-column">{`user.firstName`}</td>
+          <td className="user-column">{`user.lastName`}</td>
+          <td className="user-column">{`user.address`}</td>
+          <td className="user-column">{`user.city`}</td>
+          <td className="user-column">
+            <button
+              className="modifier-button"
+              onClick={() => {}}
+            >
+              Modifier
+            </button>
+            <br/>
+            <button
+              className="supprimer-button"
+              onClick={() => {}}
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+         {users.map((user) => (
+          <tr className="user-row" key={user.id}>
+            <td className="user-column">{`user.email`}</td>
+            <td className="user-column">{user.firstName}</td>
+            <td className="user-column">{user.lastName}</td>
+            <td className="user-column">{user.address}</td>
+            <td className="user-column">{user.city}</td>
+            <td className="user-column">
+              <button
+                className="modifier-button"
+                onClick={() => openModifyModal(user.username)}
+              >
+                Modifier
+              </button>
+              <br/>
+              <button
+                className="supprimer-button"
+                onClick={() => openDeleteConfirmation(user.username)}
+              >
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
     {users.map((user) => (
       <div className="user-row" key={user.id}>
         <div className="user-column">{user.email}</div>
